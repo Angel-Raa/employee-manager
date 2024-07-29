@@ -22,11 +22,14 @@ import com.github.angel.raa.service.EmployeeService;
 import com.github.angel.raa.utils.PageRenderUtils;
 
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.Min;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 
 /**
  *
@@ -62,22 +65,21 @@ public class EmployeeController {
     @PostMapping("/registro")
     public String saveEmployee(@Valid Employee employee, BindingResult result, Model model) {
         model.addAttribute("departamentos", List.of(
-            "Ventas", 
-            "Marketing", 
-            "IT", 
-            "RRHH", 
-            "Finanzas", 
-            "Logística", 
-            "Producción", 
-            "Calidad", 
-            "Compras", 
-            "Atención al Cliente", 
-            "Investigación y Desarrollo", 
-            "Legal", 
-            "Administración", 
-            "Servicio Técnico", 
-            "Mantenimiento"
-        ));
+                "Ventas",
+                "Marketing",
+                "IT",
+                "RRHH",
+                "Finanzas",
+                "Logística",
+                "Producción",
+                "Calidad",
+                "Compras",
+                "Atención al Cliente",
+                "Investigación y Desarrollo",
+                "Legal",
+                "Administración",
+                "Servicio Técnico",
+                "Mantenimiento"));
         if (result.hasErrors()) {
             Map<String, String> errors = result.getFieldErrors()
                     .stream()
@@ -86,34 +88,75 @@ public class EmployeeController {
             model.addAttribute("employee", employee);
             return "form/registro";
         }
-       
+
         model.addAttribute("employee", employee);
         employeeService.save(employee);
-        return "home";
+        return "redirect:/home";
     }
 
     @GetMapping("/registro")
     public String form(final Model model) {
         model.addAttribute("departamentos", List.of(
-            "Ventas", 
-            "Marketing", 
-            "IT", 
-            "RRHH", 
-            "Finanzas", 
-            "Logística", 
-            "Producción", 
-            "Calidad", 
-            "Compras", 
-            "Atención al Cliente", 
-            "Investigación y Desarrollo", 
-            "Legal", 
-            "Administración", 
-            "Servicio Técnico", 
-            "Mantenimiento"
-        ));
+                "Ventas",
+                "Marketing",
+                "IT",
+                "RRHH",
+                "Finanzas",
+                "Logística",
+                "Producción",
+                "Calidad",
+                "Compras",
+                "Atención al Cliente",
+                "Investigación y Desarrollo",
+                "Legal",
+                "Administración",
+                "Servicio Técnico",
+                "Mantenimiento"));
         model.addAttribute("employee", new Employee());
         model.addAttribute("title", "Registro de empleados");
         return "form/registro";
     }
 
+    @PostMapping("/edit/{id}")
+    public String edit(@PathVariable @Min(1) Long id, @Valid @ModelAttribute final Employee employee,
+            final BindingResult result, final Model model) {
+        if (result.hasErrors()) {
+            Map<String, String> errors = result.getFieldErrors()
+                    .stream()
+                    .collect(Collectors.toMap(FieldError::getField, FieldError::getDefaultMessage));
+            model.addAttribute("errors", errors);
+            model.addAttribute("employee", employee);
+            return "edit";
+        }
+        Employee employeeDb = employeeService.findById(id);
+        if (employeeDb == null) {
+            return "error";
+        }
+        employeeService.update(employeeDb, id);
+        return "redirect:/";
+    }
+
+    @GetMapping("/edit/{id}")
+    public String editForm(@PathVariable Long id, Model model) {
+        Employee employee = employeeService.findById(id);
+        model.addAttribute("employee", employee);
+        model.addAttribute("title", "Editar empleado");
+        model.addAttribute("departamentos", List.of(
+                "Ventas",
+                "Marketing",
+                "IT",
+                "RRHH",
+                "Finanzas",
+                "Logística",
+                "Producción",
+                "Calidad",
+                "Compras",
+                "Atención al Cliente",
+                "Investigación y Desarrollo",
+                "Legal",
+                "Administración",
+                "Servicio Técnico",
+                "Mantenimiento"));
+        return "edit";
+    }
 }

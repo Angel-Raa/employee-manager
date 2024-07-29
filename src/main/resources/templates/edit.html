@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <link th:insert="layout/base :: link">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${title}"></title>
+</head>
+
+<body>
+    <header th:insert="layout/base :: header"></header>
+    <div class="container mt-5">
+        <h2 class="mb-4">Editar Empleado</h2>
+        <form id="editEmployeeForm" action="">
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label for="editFirstName" class="form-label">Nombre</label>
+                    <input type="text" class="form-control" id="editFirstName" name="nombre" required>
+                </div>
+                <div class="col-md-6">
+                    <label for="editLastName" class="form-label">Apellido</label>
+                    <input type="text" class="form-control" id="editLastName" name="apellido" required>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label for="editEmail" class="form-label">Correo electrónico</label>
+                <input type="email" class="form-control" id="editEmail" name="email" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="editPosition" class="form-label">Cargo</label>
+                <input type="text" class="form-control" id="editPosition" name="position" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="editDepartment" class="form-label">Departamento</label>
+                <select class="form-select" id="editDepartment" name="department" required>
+                    <option value="">Seleccione un departamento</option>
+                    <option value="it">IT</option>
+                    <option value="hr">Recursos Humanos</option>
+                    <option value="sales">Ventas</option>
+                    <option value="marketing">Marketing</option>
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label for="editStartDate" class="form-label">Fecha de inicio</label>
+                <input type="date" class="form-control" id="editStartDate" name="startDate" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="editSalary" class="form-label">Salario</label>
+                <div class="input-group">
+                    <span class="input-group-text">$</span>
+                    <input type="number" class="form-control" id="editSalary" name="salary" required>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label for="editPhone" class="form-label">Teléfono</label>
+                <input type="tel" class="form-control" id="editPhone" name="telefono" required>
+            </div>
+
+
+            <div class="mb-3 form-check">
+                <input type="checkbox" class="form-check-input" id="editFullTime" name="fullTime">
+                <label class="form-check-label" for="editFullTime">Tiempo completo</label>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Guardar cambios</button>
+            <button type="button" class="btn btn-secondary">Cancelar</button>
+        </form>
+    </div>
+
+    <div th:insert="layout/base :: scripts"></div>
+</body>
+
+</html>

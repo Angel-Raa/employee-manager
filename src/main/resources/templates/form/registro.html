@@ -58,7 +58,7 @@
                 <div class="invalid-feedback" th:if="${errors != null && errors.containsKey('fecha')}"
                     th:text="${errors['fecha']}"></div>
             </div>
-
+`
             <div class="mb-3">
                 <label for="salary" class="form-label">Salario</label>
                 <div class="input-group">
@@ -66,7 +66,7 @@
                     <input type="number" class="form-control" id="salary" th:field="*{salario}"
                         th:classappend="${errors != null && errors.containsKey('salario')} ? 'is-invalid'">
                     <div class="invalid-feedback" th:if="${errors != null && errors.containsKey('salario')}"
-                        th:text="${errors['telefono']}"></div>
+                        th:text="${errors['salario']}"></div>
 
                 </div>
             </div>

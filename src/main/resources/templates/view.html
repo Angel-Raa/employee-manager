@@ -73,17 +73,18 @@
                                 <td th:text="${employee.fecha}"></td>
                                 <th th:text="${employee.departamento}"></th>
 
-
                                 <td>
-                                    <button class="btn btn-sm btn-primary" data-bs-toggle="modal"
-                                        data-bs-target="#editEmployeeModal">
+                                    <a class="btn btn-sm btn-primary"
+                                        th:href="@{/employees/edit/{id}(id=${employee.id})}">
                                         <i class="bi bi-pencil"></i>
-                                    </button>
+                                    </a>
+
                                     <button class="btn btn-sm btn-danger" data-bs-toggle="modal"
                                         data-bs-target="#deleteEmployeeModal">
                                         <i class="bi bi-trash"></i>
                                     </button>
                                 </td>
+
                             </tr>
                         </tbody>
                     </table>
@@ -133,53 +134,6 @@
 
 
     <!-- Edit Modal HTML -->
-    <div class="modal fade" id="editEmployeeModal" tabindex="-1" aria-labelledby="editEmployeeModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <form>
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="editEmployeeModalLabel">Editar</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="mb-3">
-                            <label for="editName" class="form-label">Nombre</label>
-                            <input type="text" class="form-control" id="editName" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="apellido" class="form-label">Apellido</label>
-                            <input type="text" class="form-control" id="apellido" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="email" class="form-label">Email</label>
-                            <input type="email" class="form-control" id="email" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="editPhone" class="form-label">Telefono</label>
-                            <input type="text" class="form-control" id="editPhone" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="cargo" class="form-label">Cargo</label>
-                            <input type="text" class="form-control" id="cargo" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="salario" class="form-label">Salario</label>
-                            <input type="number" class="form-control" id="salario" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="fecha" class="form-label">Fecha</label>
-                            <input type="month" class="form-control" id="fecha" required>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                        <button type="submit" class="btn btn-primary">Guardar Cambios</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
 
     <!-- Delete Modal HTML -->
     <div class="modal fade" id="deleteEmployeeModal" tabindex="-1" aria-labelledby="deleteEmployeeModalLabel"
