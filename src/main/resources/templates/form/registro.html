@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="https://www.thymeleaf.org/">
+
+<head>
+    <meta charset="UTF-8">
+    <link th:insert="layout/base :: head">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${title}"></title>
+</head>
+
+<body>
+    <header th:insert="layout/base :: header"></header>
+    <!-- Add Modal HTML -->
+    <div class="container mt-5">
+        <h2 class="mb-4">Formulario de Empleado</h2>
+        <form th:action="@{/registro}" method="post" th:object="${employee}">
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label for="firstName" class="form-label">Nombre</label>
+                    <input type="text" class="form-control" id="firstName" th:field="*{nombre}"
+                        th:classappend="${errors != null && errors.containsKey('nombre')} ? 'is-invalid'">
+                    <div class="invalid-feedback" th:if="${errors != null && errors.containsKey('nombre')}"
+                        th:text="${errors['nombre']}"></div>
+
+                </div>
+                <div class="col-md-6">
+                    <label for="lastName" class="form-label">Apellido</label>
+                    <input type="text" class="form-control" id="lastName" th:field="*{apellido}"
+                        th:classappend="${errors != null && errors.containsKey('apellido')} ? 'is-invalid'">
+                    <div class="invalid-feedback" th:if="${errors != null && errors.containsKey('apellido')}"
+                        th:text="${errors['apellido']}"></div>
+
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label for="email" class="form-label">Correo electrónico</label>
+                <input type="email" class="form-control" id="email" th:field="*{email}"
+                    th:classappend="${errors != null && errors.containsKey('email')} ? 'is-invalid'">
+                <div class="invalid-feedback" th:if="${errors != null && errors.containsKey('email')}"
+                    th:text="${errors['email']}"></div>
+
+            </div>
+
+            <div class="mb-3">
+                <label for="position" class="form-label">Cargo</label>
+                <input type="text" class="form-control" id="position" th:field="*{cargo}"
+                    th:classappend="${errors != null && errors.containsKey('cargo')} ? 'is-invalid'">
+                <div class="invalid-feedback" th:if="${errors != null && errors.containsKey('cargo')}"
+                    th:text="${errors['cargo']}"></div>
+
+            </div>
+
+            <div class="mb-3">
+                <label for="startDate" class="form-label">Fecha de inicio</label>
+                <input type="date" class="form-control" id="startDate" th:field="*{fecha}"
+                    th:classappend="${errors != null && errors.containsKey('fecha')} ? 'is-invalid'">
+                <div class="invalid-feedback" th:if="${errors != null && errors.containsKey('fecha')}"
+                    th:text="${errors['fecha']}"></div>
+            </div>
+
+            <div class="mb-3">
+                <label for="salary" class="form-label">Salario</label>
+                <div class="input-group">
+                    <span class="input-group-text">$</span>
+                    <input type="number" class="form-control" id="salary" th:field="*{salario}"
+                        th:classappend="${errors != null && errors.containsKey('salario')} ? 'is-invalid'">
+                    <div class="invalid-feedback" th:if="${errors != null && errors.containsKey('salario')}"
+                        th:text="${errors['telefono']}"></div>
+
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="departamento" class="form-label">Departamento</label>
+                <select class="form-select" id="departamento" th:field="*{departamento}"
+                    th:classappend="${errors != null && errors.containsKey('departamento')} ? 'is-invalid'">
+                    <option value="" disabled selected>Seleccione un departamento</option>
+                    <option th:each="departamento : ${departamentos}" th:value="${departamento}"
+                        th:text="${departamento}"></option>
+                </select>
+                <div class="invalid-feedback" th:if="${errors != null && errors.containsKey('departamento')}"
+                    th:text="${errors['departamento']}"></div>
+            </div>
+
+            <div class="mb-3">
+                <label for="phone" class="form-label">Teléfono</label>
+                <input type="tel" class="form-control" id="phone" th:field="*{telefono}"
+                    th:classappend="${errors != null && errors.containsKey('telefono')} ? 'is-invalid'">
+                <div class="invalid-feedback" th:if="${errors != null && errors.containsKey('telefono')}"
+                    th:text="${errors['telefono']}"></div>
+
+            </div>
+
+            <button type="submit" class="btn btn-primary">Enviar</button>
+        </form>
+
+    </div>
+
+    <div th:insert="layout/base :: scripts"></div>
+
+</body>
+
+</html>

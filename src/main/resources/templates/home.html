@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <link th:insert="layout/base :: link">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${title}"></title>
+</head>
+
+<body>
+    <header th:insert="layout/base :: header"></header>
+    <div class="container mt-5">
+        <h1 th:text="${message}" class="mb-4"></h1>
+
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Empleados Totales</h5>
+                        <p class="card-text display-4" th:text="${count}"></p>
+                        <a th:href="@{/}" class="btn btn-primary">Ver Empleados</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Departamentos</h5>
+                        <p class="card-text display-4" th:text="${countDepartamento}"></p>
+                        <a href="#" class="btn btn-primary">Ver Departamentos</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Nuevos este mes</h5>
+                        <p class="card-text display-4">12</p>
+                        <a href="#" class="btn btn-primary">Ver Nuevos</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-4">
+            <div class="col-md-6">
+                <h3>Acciones Rápidas</h3>
+                <div class="list-group">
+                    <a th:href="@{/registro}" class="list-group-item list-group-item-action">
+                        <i class="bi bi-person-plus"></i> Añadir Nuevo Empleado
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-action">
+                        <i class="bi bi-search"></i> Buscar Empleado
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-action">
+                        <i class="bi bi-file-earmark-text"></i> Generar Informe
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <h3>Empleados Recientes</h3>
+                <ul class="list-group">
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        Juan Pérez
+                        <span class="badge bg-primary rounded-pill">Ventas</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        María García
+                        <span class="badge bg-primary rounded-pill">RR.HH.</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        Carlos López
+                        <span class="badge bg-primary rounded-pill">IT</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
