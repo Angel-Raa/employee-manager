@@ -29,7 +29,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 
 /**
  *
@@ -132,14 +131,16 @@ public class EmployeeController {
         if (employeeDb == null) {
             return "error";
         }
+        model.addAttribute("employee", employee);
         employeeService.update(employeeDb, id);
         return "redirect:/";
     }
 
     @GetMapping("/edit/{id}")
-    public String editForm(@PathVariable Long id, Model model) {
+    public String editForm(@PathVariable Long id, final Model model) {
         Employee employee = employeeService.findById(id);
         model.addAttribute("employee", employee);
+        model.addAttribute("id", id);
         model.addAttribute("title", "Editar empleado");
         model.addAttribute("departamentos", List.of(
                 "Ventas",
